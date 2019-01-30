@@ -27,7 +27,6 @@ class MemberType extends AbstractType
             ->add('firstname')
             ->add('preprovision')
             ->add('lastname')
-            ->add('roles')
             ->add('birthdate', DateType::class)
             ->add('street')
             ->add('place')

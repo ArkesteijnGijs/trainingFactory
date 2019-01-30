@@ -18,6 +18,7 @@ use AppBundle\Form\TrainingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends Controller
 {
@@ -28,7 +29,7 @@ class AdminController extends Controller
         public function showLedenAction(){
             $member = $this->getDoctrine()
                 ->getRepository(Member::class)
-                ->findAll();
+                ->findByRoles('ROLE_LEDEN');
 
             if (!$member) {
                 throw $this->createNotFoundException(
@@ -43,7 +44,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/ledenAdd")
      */
-    public function ledenAddAction(Request $request)
+    public function ledenAddAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $newmember = new Member();
         $form=$this->createForm(MemberType::class,$newmember);
@@ -54,11 +55,16 @@ class AdminController extends Controller
             $member=$form->getData();
             $em = $this->getDoctrine()->getManager();
 
+            $password = $passwordEncoder->encodePassword($member, $member->getPassword());
 
+            $member->setPassword($password);
+            $member->setRoles(array("ROLE_LEDEN"));
             $em ->persist($member);
 
             $em->flush();
             $this->addFlash('success', 'Member created');
+
+            return $this->redirectToRoute('members');
         }
         return $this->render('/admin/ledenAdd.html.twig',[
             'memberform' => $form->createView()
