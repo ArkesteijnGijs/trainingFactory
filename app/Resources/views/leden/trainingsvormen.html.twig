@@ -1,0 +1,61 @@
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/web/css/HealthOne.css">
+    <link rel="stylesheet" href="/web/css/bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/bootstrap.min.js"></script>
+{% endblock %}
+
+<nav class="navbar navbar-default navbar-fixed-top" style="color: #4cae4c;" >
+    <div class="navbar-header" style="background-color: black" >
+        <p style="margin-left: 1700px"></p></br>
+        <p class="navbar-brand" style="color: white">Training Factory Den Haag</p>
+        <img style="display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 20%;"
+             class="card-img-top" src="../../../web/images/logo1.png">
+    </div>
+    <div class="container-fluid" style="background-color: black;">
+        <ul class="nav navbar-nav">
+            <li><a href="home">Home</a></li>
+            <li class="active"><a href="trainingsvormen">Trainingsvorm</a></li>
+            <li><a href="agenda">Agenda</a></li>
+            <li><a href="inschrijvingen">Inschrijvingen</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li ><a href="editAccount"><span class="glyphicon glyphicon-user"></span>Account</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+    <h1>Leden trainingsvormen</h1>
+    <table id="table" class="table" >
+        <thead>
+        <tr>
+            <th>Tijd</th>
+            <th>Datum</th>
+            <th>Locatie</th>
+            <th>Maximaal aantal deelnemers</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for lessen in les %}
+            <tr>
+                <td>{{ lessen.time|date("H-i-s") }}</td>
+                <td>{{ lessen.date|date("d-m-y") }}</td>
+                <td>{{ lessen.location }}</td>
+                <td>{{ lessen.max_persons }}</td>
+                <td>
+                    <a href="ledenInschrijven/{{ lessen.id }}" style="color: black;"><button id="begeleiderToevoegen" class="glyphicon glyphicon-book">Inschrijven</button></a>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</nav>

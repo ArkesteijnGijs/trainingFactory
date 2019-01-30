@@ -1,0 +1,74 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="/web/css/HealthOne.css">
+    <link rel="stylesheet" href="/web/css/bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-default" style="color: #4cae4c;" >
+        <div class="navbar-header" style="background-color: black" >
+            <p style="margin-left: 1700px"></p></br>
+            <p class="navbar-brand" style="color: white">Training Factory Den Haag</p>
+            <img style="display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 20%;"
+                 class="card-img-top" src="../../../web/images/logo1.png">
+        </div>
+        <div class="container-fluid" style="background-color: black;">
+            <ul class="nav navbar-nav">
+                <li><a href="home">Home</a></li>
+                <li><a href="trainingsvormen">Trainingsvorm</a></li>
+                <li class="active"><a href="begeleiders">Begeleiders</a></li>
+                <li><a href="leden">Leden</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="../logout"><span class="glyphicon glyphicon-user"></span> Uitloggen</a></li>
+            </ul>
+        </div>
+
+    </nav>
+    <div class="container">
+    <h1>Begeleiders</h1>
+    <table id="table" class="table" >
+        <thead>
+        <tr>
+            <th>Login Naam</th>
+            <th>Wachtwoord</th>
+            <th>Voornaam</th>
+            <th>Tussenvoegsel</th>
+            <th>Achternaam</th>
+            <th>Geboorte Datum</th>
+            <th>Huur Datum</th>
+            <th>Salary</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for instructors in begeleiders %}
+            <tr>
+                <td>{{ instructors.loginname }}</td>
+                <td>{{ instructors.password }}</td>
+                <td>{{ instructors.firstname }}</td>
+                <td>{{ instructors.preprovision }}</td>
+                <td>{{ instructors.lastname }}</td>
+                <td>{{ instructors.birthdate|date("d-m-y") }}</td>
+                <td>{{ instructors.hiringDate|date("d-m-y") }}</td>
+                <td>{{ instructors.salary}}</td>
+                <td>
+                    <a href="begeleidersWijzigen/{{ instructors.id }}" style="color: black;"><button id="begeleiderToevoegen" class="glyphicon glyphicon-edit"></button></a>
+                </td>
+                <td>
+                    <a href="begeleidersVerwijderen/{{ instructors.id }}" style="color: black;"><button id="begeleiderToevoegen" class="glyphicon glyphicon-trash"></button></a>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button id="begeleiderToevoegen" class="btn btn-primary"><a href="begeleidersAdd" style="color: white;">Begeleider Toevoegen</a></button>
+    </div>
+{% endblock %}

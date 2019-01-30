@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Member Weizigen</h1>
+                {{ form_start(memberForm,{'attr': {'novalidate':'novalidate'}}) }}
+                {{ form_widget(memberForm) }}
+                {{ form_end(memberForm) }}
+            </div>
+        </div>
+    </div>
+
+    <button id="" class="btn btn-block"><a  href="../leden" style="color: black;">Terug</a></button>
+{% endblock %}

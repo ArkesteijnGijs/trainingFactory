@@ -1,0 +1,43 @@
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/web/css/HealthOne.css">
+    <link rel="stylesheet" href="/web/css/bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/bootstrap.min.js"></script>
+{% endblock %}
+
+<nav class="navbar navbar-default navbar-fixed-top" style="color: #4cae4c;" >
+    <div class="navbar-header" style="background-color: black" >
+        <p style="margin-left: 1700px"></p></br>
+        <p class="navbar-brand" style="color: white">Training Factory Den Haag</p>
+        <img style="display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 20%;"
+             class="card-img-top" src="../../../web/images/logo1.png">
+    </div>
+    <div class="container-fluid" style="background-color: black;">
+        <ul class="nav navbar-nav">
+            <li><a href="home">Home</a></li>
+            <li><a href="inschrijvingen">Inschrijvingen</a></li>
+            <li><a href="agenda">Agenda</a></li>
+            <li class="active"><a href="lesPlannen">Les plannen</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li ><a href="../logout"><span class="glyphicon glyphicon-user"></span> Uitloggen</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Les Plannen</h1>
+                {{ form_start(lessonform,{'attr': {'novalidate':'novalidate'}}) }}
+                {{ form_widget(lessonform) }}
+
+                {{ form_end(lessonform) }}
+            </div>
+        </div>
+    </div>
+</nav>

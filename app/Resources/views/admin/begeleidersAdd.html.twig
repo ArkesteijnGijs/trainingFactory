@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Member Toevoegen</h1>
+                {{ form_start(begeleidersform,{'attr': {'novalidate':'novalidate'}}) }}
+                {{ form_widget(begeleidersform) }}
+                {{ form_end(begeleidersform) }}
+            </div>
+        </div>
+    </div>
+
+    <button id="" class="btn btn-block"><a  href="begeleiders" style="color: black;">Terug</a></button>
+{% endblock %}
+

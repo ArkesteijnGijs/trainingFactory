@@ -1,0 +1,73 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="/web/css/HealthOne.css">
+    <link rel="stylesheet" href="/web/css/bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-default " style="color: #4cae4c;" >
+        <div class="navbar-header" style="background-color: black" >
+            <p style="margin-left: 1700px"></p></br>
+            <p class="navbar-brand" style="color: white">Training Factory Den Haag</p>
+            <img style="display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 20%;"
+                 class="card-img-top" src="../../../web/images/logo1.png">
+        </div>
+        <div class="container-fluid" style="background-color: black;">
+            <ul class="nav navbar-nav">
+                <li><a href="home">Home</a></li>
+                <li><a href="trainingsvormen">Trainingsvorm</a></li>
+                <li><a href="begeleiders">Begeleiders</a></li>
+                <li class="active"><a href="leden">Leden</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../logout"><span class="glyphicon glyphicon-user"></span> Uitloggen</a></li>
+            </ul>
+        </div>
+
+    </nav>
+    <div class="container">
+        <h1>Leden</h1>
+    <table id="table" class="table">
+    <thead>
+    <tr>
+        <th>Login Naam</th>
+        <th>Wachtwoord</th>
+        <th>Voornaam</th>
+        <th>Tussenvoegsel</th>
+        <th>Achternaam</th>
+        <th>Geboorte Datum</th>
+        <th>straat</th>
+        <th>Stad</th>
+    </tr>
+    </thead>
+        <tbody>
+
+        {% for members in leden %}
+            <tr>
+                <td>{{ members.username }}</td>
+                <td>{{ members.password }}</td>
+                <td>{{ members.firstname }}</td>
+                <td>{{ members.preprovision }}</td>
+                <td>{{ members.lastname }}</td>
+                <td>{{ members.birthdate|date("d-m-y") }}</td>
+                <td>{{ members.street}}</td>
+                <td>{{ members.place}}</td>
+                <td>
+                    <a href="ledenWijzigen/{{ members.id }}" style="color: black;"><button id="ledenToevoegen" class="glyphicon glyphicon-edit"></button></a>
+                </td>
+                <td>
+                    <a href="ledenVerwijderen/{{ members.id }}" style="color: black;"><button id="ledenoevoegen" class="glyphicon glyphicon-trash"></button></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button id="memberToevoegen" class="btn btn-primary"><a href="ledenAdd" style="color: white;">Lid Toevoegens</a></button>
+    </div>
+{% endblock %}
