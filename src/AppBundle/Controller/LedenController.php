@@ -57,7 +57,7 @@ class LedenController extends Controller
             );
         }
 
-        return $this->render("leden/trainingsvormen.html.twig",[
+        return $this->render("leden/trainingsvorm.html.twig",[
             'les'=>$lesvorm
         ]);
     }

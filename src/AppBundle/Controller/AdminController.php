@@ -17,7 +17,6 @@ use AppBundle\Form\MemberType;
 use AppBundle\Form\TrainingType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends Controller
@@ -44,7 +43,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/ledenAdd")
      */
-    public function memberAddAction(Request $request)
+    public function ledenAddAction(Request $request)
     {
         $newmember = new Member();
         $form=$this->createForm(MemberType::class,$newmember);
@@ -125,7 +124,7 @@ class AdminController extends Controller
 
             $em->flush();
 
-            return $this->redirectToRoute('begeleiders');
+            return $this->redirectToRoute('begeleidersShow');
         }
 
         return $this->render('admin/begeleidersWijzigen.html.twig', [
@@ -150,7 +149,7 @@ class AdminController extends Controller
 
             $em->flush();
             $this->addFlash('success', 'Begeleider created');
-            return $this->redirectToRoute('begeleiders');
+            return $this->redirectToRoute('begeleidersShow');
         }
         return $this->render('/admin/begeleidersAdd.html.twig',[
             'begeleidersform' => $form->createView()
@@ -167,13 +166,13 @@ class AdminController extends Controller
         $post = $em->getRepository('AppBundle:Instructor')->find($id);
 
         if (!$post) {
-            return $this->redirectToRoute('begeleiders');
+            return $this->redirectToRoute('begeleidersShow');
         }
 
         $em->remove($post);
         $em->flush();
 
-        return $this->redirectToRoute('begeleiders');
+        return $this->redirectToRoute('begeleidersShow');
     }
 
     /**
@@ -201,7 +200,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin/trainingsvormen")
+     * @Route("/admin/trainingsvorm", name="trainingsvorm")
      */
     public function adminAction(){
         $trainingsvorm = $this->getDoctrine()
@@ -214,14 +213,56 @@ class AdminController extends Controller
             );
         }
 
-        return $this->render("admin/trainingsvormen.html.twig",[
+        return $this->render("admin/trainingsvorm.html.twig",[
             'trainingsform'=>$trainingsvorm
         ]);
     }
 
+    /**
+     * @Route("/admin/trainingsvormVerwijderen/{id}", name="trainingsvormDelete")
+     */
+    public function deleteTrainingsvormAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $post = $em->getRepository('AppBundle:Training')->find($id);
+
+        if (!$post) {
+            return $this->redirectToRoute('trainingsvorm');
+        }
+
+        $em->remove($post);
+        $em->flush();
+
+        return $this->redirectToRoute('trainingsvorm');
+    }
 
     /**
-     * @Route("/admin/begeleiders")
+     * @Route("/admin/trainingsvormWijzigen/{trainingId}", name="iets")
+     */
+    public function trainingEditAction(Request $request, $trainingId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $training = $em->getRepository('AppBundle:Training')->find($trainingId);
+
+        $form = $this->createForm(TrainingType::class, $training);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->flush();
+
+            return $this->redirectToRoute('trainingsvorm');
+        }
+
+        return $this->render('admin/trainingsvormWijzigen.html.twig', [
+            'trainingsForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/begeleiders", name="begeleidersShow")
      */
     public function showBegeleidersAction(){
         $instructor = $this->getDoctrine()

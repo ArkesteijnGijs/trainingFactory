@@ -1,0 +1,15 @@
+body {
+    position: relative;
+}
+ul.nav-pills {
+    top: 20px;
+    position: fixed;
+}
+div.col-sm-12 div {
+    padding: 10px;
+    height: 250px;
+    font-size: 28px;
+    width: 100%;
+}
+#section1 {color: #fff; background-color: lightgray;}
+#section2 {color: #fff; background-color: lightgray;    }

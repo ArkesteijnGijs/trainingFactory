@@ -1,6 +1,7 @@
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="/web/css/HealthOne.css">
+    <link rel="stylesheet" href="/web/css/trainingFactory.css" xmlns="http://www.w3.org/1999/html"
+          xmlns="http://www.w3.org/1999/html">
     <link rel="stylesheet" href="/web/css/bootstrap.min.css">
 {% endblock %}
 
@@ -21,23 +22,24 @@
     <div class="container-fluid" style="background-color: black;">
         <ul class="nav navbar-nav">
             <li><a href="home">Home</a></li>
-            <li><a href="trainingsvorm">Trainingsvorm</a></li>
-            <li class="active"><a href="begeleiders">Begeleiders</a></li>
-            <li><a href="leden">Leden</a></li>
+            <li><a href="trainingsvormen">Trainingsvormen</a></li>
+            <li class="active"><a href="contact">Contact</a></li>
+            <li><a href="gedrag">Gedragsregels</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li ><a href="../logout"><span class="glyphicon glyphicon-user"></span> Uitloggen</a></li>
+            <li ><a href="../logout"><span class="glyphicon glyphicon-log-in"></span> Registreren</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li ><a href="login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
         </ul>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <h1>Les Plannen</h1>
-                {{ form_start(lessonform,{'attr': {'novalidate':'novalidate'}}) }}
-                {{ form_widget(lessonform) }}
+</nav>
 
-                {{ form_end(lessonform) }}
-            </div>
+<div class="container">
+    <div class="col-sm-12">
+        <div id="section1">
+            <h1>Contact Pagina</h1>
+            <p>Welkom op de website van Training Factory Den Haag. </br> Op deze site kun je je registreren en je dan opgeven voor de aanbevolen lessen.</p>
         </div>
     </div>
-</nav>
+</div>

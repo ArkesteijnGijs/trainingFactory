@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Training;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +23,24 @@ class DefaultController extends Controller
             'error' =>$error
         ]);
     }
+    /**
+     * @Route("/bezoeker/trainingsvormen")
+     */
+    public function adminAction(){
+        $trainingsvorm = $this->getDoctrine()
+            ->getRepository(Training::class)
+            ->findAll();
 
+        if (!$trainingsvorm) {
+            throw $this->createNotFoundException(
+                'No product found for id '
+            );
+        }
+
+        return $this->render("bezoeker/trainingsvormen.html.twig",[
+            'trainingsform'=>$trainingsvorm
+        ]);
+    }
     /**
      * @Route("/bezoeker/home")
      */
@@ -31,10 +49,24 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/bezoeker/contact")
+     */
+    public function contactaction(){
+        return $this->render('bezoeker/contact.html.twig');
+    }
+
+    /**
      * @Route("/logout", name="logout")
      */
     public function logoutaction(){
         return $this->render('bezoeker/logout.html.twig');
+    }
+
+    /**
+     * @Route("bezoeker/gedrag", name="gedrag")
+     */
+    public function loadGedragAction(){
+        return $this->render('bezoeker/gedrag.html.twig');
     }
 
 
